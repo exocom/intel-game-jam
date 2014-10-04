@@ -1,0 +1,15 @@
+{
+  "name": "intel-game-jam",
+  "version": "0.0.0",
+  "authors": [
+    "Kalarrs Topham <k-dawg-klark@hotmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
