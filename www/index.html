@@ -1,11 +1,14 @@
-<!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-<script src="//cdn.html5quintus.com/v0.2.0/quintus-all.js"></script>
-<script src="scripts/app.js"></script>
-</body>
+	<body>
+       <canvas id="myCanvas" width=900 height=600 style="border: 1px solid black"></canvas> 
+		<script>
+       var can = document.getElementById("myCanvas");
+			var ctx = can.getContext("2d");
+			
+			ctx.fillStyle = "#007cde";
+			ctx.strokeStyle = "green";
+			ctx.fillRect(50, 25, 200, 50);
+
+		</script>
+	</body>
 </html>
