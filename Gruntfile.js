@@ -9,7 +9,7 @@ module.exports = function (grunt) {
     watch: {
       livereload: {
         options: {
-          livereload: '35700'
+          livereload: '<%= connect.livereload.options.livereload %>'
         },
         files: [
           'www/**'
@@ -17,10 +17,8 @@ module.exports = function (grunt) {
       }
     },
 
-    // The actual grunt server settings
     connect: {
       options: {
-        // Change this to '0.0.0.0' to access the server from outside.
         hostname: '127.0.0.1'
       },
       livereload: {
@@ -44,11 +42,6 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
-  });
 
-
-  grunt.registerTask('default', ['server']);
+  grunt.registerTask('default', ['serve']);
 };
