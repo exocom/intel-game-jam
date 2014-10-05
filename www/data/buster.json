@@ -1,0 +1,10 @@
+{
+  "buster": {
+    "sx": 0,
+    "sy": 0,
+    "cols": 5,
+    "tilew": 55,
+    "tileh": 47,
+    "frames": 5
+  }
+}

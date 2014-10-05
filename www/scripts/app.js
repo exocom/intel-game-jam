@@ -25,7 +25,7 @@ window.addEventListener("load", function () {
 
 
   Q.SPRITE_PLAYER = 1;
-  Q.SPRITE_BULLET = 0;
+  Q.SPRITE_BUSTER = 0;
   Q.SPRITE_COLLECTABLE = 3;
   Q.SPRITE_ENEMY = 4;
   Q.SPRITE_DOOR = 8;
@@ -38,18 +38,15 @@ window.addEventListener("load", function () {
         sheet: "player",  // Setting a sprite sheet sets sprite width and height
         sprite: "player",
         direction: "right",
-        //standingPoints: [ [ 0, 11], [0, 8], [-6,-12], [6,-12], [6, 9 ], [ 4, 11 ]], // [ [ -16, 44], [ -23, 35 ], [-23,-48], [23,-48], [23, 35 ], [ 16, 44 ]],
-        //duckingPoints : [ [ -4, 11], [ -6, 8], [-6,-12], [6,-12], [6, 9 ], [ 4, 11 ]],
         jumpSpeed: -425,
         speed: 300,
         strength: 100,
         score: 0,
         type: Q.SPRITE_PLAYER,
         collisionMask: Q.SPRITE_DEFAULT | Q.SPRITE_DOOR | Q.SPRITE_COLLECTABLE,
-        bulletSpeed: 200
+        busterSpeed: 300
       });
 
-      // this.p.points = this.p.standingPoints;
       this.p.points = [
         [-20, -20],
         [20, -20],
@@ -149,8 +146,8 @@ window.addEventListener("load", function () {
     fire: function () {
       var p = this.p;
       var xos = 34;
-      var yos = 21;
-      var vx = p.bulletSpeed;
+      var yos = 1;
+      var vx = p.busterSpeed;
 
       if (this.p.direction === "left") {
         xos = (-xos) + 40;
@@ -160,7 +157,7 @@ window.addEventListener("load", function () {
       this.play("fire_" + this.p.direction);
 
       this.stage.insert(
-        new Q.Bullet({
+        new Q.Buster({
           x: this.c.points[0][0] + xos,
           y: this.c.points[0][1] + yos,
           vx: vx,
@@ -284,19 +281,22 @@ window.addEventListener("load", function () {
     }
   });
 
-  Q.Sprite.extend("Bullet", {
+  Q.Sprite.extend("Buster", {
     init: function (p) {
 
       this._super(p, {
+        sheet: "buster",  // Setting a sprite sheet sets sprite width and height
+        sprite: "buster",
         w: 10,
         h: 10,
         gravity: 0,
-        type: Q.SPRITE_BULLET,
+        type: Q.SPRITE_BUSTER,
         collisionMask: Q.SPRITE_ENEMY
       });
 
-      this.add("2d");
+      this.add("2d, animation");
       this.on("hit.sprite", this, "collision");
+
     },
 
     collision: function (col) {
@@ -305,11 +305,6 @@ window.addEventListener("load", function () {
 
     enemyHit: function () {
       this.destroy();
-    },
-
-    draw: function (ctx) {
-      ctx.fillStyle = "#ff0000";
-      ctx.fillRect(-this.p.cx, -this.p.cy, this.p.w, this.p.h);
     },
 
     step: function (dt) {
@@ -323,6 +318,8 @@ window.addEventListener("load", function () {
 
       p.x += p.vx * dt;
       p.y += p.vy * dt;
+
+      this.play("fire");
     }
   });
 
@@ -369,14 +366,14 @@ window.addEventListener("load", function () {
         col.obj.trigger('enemy.hit', {"enemy": this, "col": col});
         //Q.audio.play('hit.mp3');
       }
-      if (col.obj.isA("Bullet")) {
+      if (col.obj.isA("Buster")) {
         col.obj.trigger('enemy.hit', {"enemy": this, "col": col});
         this.die(col);
       }
     },
 
     die: function (col) {
-      if (col.obj.isA("Player") || col.obj.isA("Bullet")) {
+      if (col.obj.isA("Player") || col.obj.isA("Buster")) {
         //Q.audio.play('coin.mp3');
         this.p.vx = this.p.vy = 0;
         this.play('dead');
@@ -499,8 +496,9 @@ window.addEventListener("load", function () {
     container.fit(20);
   });
 
-  Q.loadTMX("level1.tmx, collectables.json, doors.json, enemies.json, fire.mp3, jump.mp3, heart.mp3, hit.mp3, coin.mp3, player.json, player.png", function () {
+  Q.loadTMX("level1.tmx, collectables.json, doors.json, enemies.json, fire.mp3, jump.mp3, heart.mp3, hit.mp3, coin.mp3, player.json, player.png, buster.json, buster.png", function () {
     Q.compileSheets("player.png", "player.json");
+    Q.compileSheets("buster.png", "buster.json");
     Q.compileSheets("collectables.png", "collectables.json");
     Q.compileSheets("enemies.png", "enemies.json");
     Q.compileSheets("doors.png", "doors.json");
@@ -517,6 +515,11 @@ window.addEventListener("load", function () {
       fire_right: {frames: [11,12], rate: 1 / 3, flip: false},
       fire_left: {frames: [11,12], rate: 1 / 3, flip: "x"}
     });
+
+    Q.animations("buster", {
+      fire: {frames: [0,1,2,3,4,4,2,3,4,4], rate: 1 / 7, flip: false, loop: true}
+    });
+
     var EnemyAnimations = {
       walk: {frames: [0, 1], rate: 1 / 3, loop: true},
       dead: {frames: [2], rate: 1 / 10}
