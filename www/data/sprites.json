@@ -3,8 +3,8 @@
     "sx": 0,
     "sy": 0,
     "cols": 1,
-    "tilew": 30,
-    "tileh": 30,
+    "tilew": 50,
+    "tileh": 40,
     "frames": 1
   },
   "enemy": {

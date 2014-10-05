@@ -50,8 +50,8 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="157" name="player" tilewidth="72" tileheight="97">
-  <image source="../images/player.png" width="1296" height="98"/>
+ <tileset firstgid="157" name="player" tilewidth="50" tileheight="40">
+  <image source="../images/player.png" width="1200" height="40"/>
   <tile id="0">
    <properties>
     <property name="Class" value="Player"/>

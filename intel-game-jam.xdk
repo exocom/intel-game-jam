@@ -6,10 +6,10 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "f370c5aa-22f7-402b-9c54-306e77662162",
-      "lastModifiedDate": 1412457880678,
+      "lastModifiedDate": 1412482919566,
       "creationDate": 1412457880651
     },
-    "sourceDirectory": "",
+    "sourceDirectory": "www",
     "cordovaPluginsDirectory": "plugins",
     "startFile": "index.html",
     "projectFiles": {},
