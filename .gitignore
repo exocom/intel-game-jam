@@ -2,3 +2,4 @@
 atlassian-ide-plugin.xml
 node_modules
 intel*
+bower_components

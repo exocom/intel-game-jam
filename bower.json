@@ -11,5 +11,11 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "resolutions": {
+    "Quintus": "175947b556f1c610129c0374a823b5db43b6db3f"
+  },
+  "dependencies": {
+    "Quintus": "https://github.com/cykod/Quintus.git#175947b556f1c610129c0374a823b5db43b6db3f"
+  }
 }
