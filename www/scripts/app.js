@@ -476,6 +476,7 @@ window.addEventListener("load", function () {
     Q.stageTMX("level1.tmx", stage);
 
     stage.add("viewport").follow(Q("Player").first());
+    stage.viewport.scale = 4;
   });
 
   Q.scene('hud', function (stage) {
